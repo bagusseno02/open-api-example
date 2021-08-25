@@ -1,0 +1,571 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "{Restful API Name}",
+    "description": "{Restful API Description}",
+    "termsOfService": "http://localhost:8080",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Bagus Seno Prasetyo Diwiryo",
+      "email": "bagus.seno39@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{environment}-example.co.id/api/v1",
+      "description": "Restful API Environment {environment_name}",
+      "variables": {
+        "environment": {
+          "default": "local",
+          "description": "Environment",
+          "enum": [
+            "local",
+            "dev",
+            "qa",
+            "prod"
+          ]
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "description": "Google",
+    "url": "https://www.google.co.id"
+  },
+  "paths": {
+    "/books": {
+      "get": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get All Books",
+        "description": "Get All Books",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Parameter page for paging",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Parameter size for paging",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get All Books Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "author": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get all books",
+                    "value": {
+                      "message": "Get all book successfully",
+                      "code": 200,
+                      "data": [
+                        {
+                          "id": 1,
+                          "name": "Harry Potter",
+                          "title": "Harry Potter Salazar",
+                          "author": "Bagus Seno Prasetyo",
+                          "category": [
+                            "action"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "tags": [
+          "Books"
+        ],
+        "summary": "Create Book",
+        "description": "Create Book",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCreateBook"
+              },
+              "examples": {
+                "Harry Potter": {
+                  "value": {
+                    "name": "Harry",
+                    "title": "Harry Potter",
+                    "author": "Potter",
+                    "email": "harry.potter@gmail.com",
+                    "category": [
+                      "action"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Book Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseBuilder"
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get all books",
+                    "value": {
+                      "success": true,
+                      "code": 200,
+                      "data": {
+                        "id": 1,
+                        "name": "Harry Potter",
+                        "title": "Harry Potter Salazar",
+                        "author": "Bagus Seno Prasetyo",
+                        "category": [
+                          "action"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "tags": [
+          "Books"
+        ],
+        "summary": "Update Book",
+        "description": "Update Book",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestUpdateBook"
+              },
+              "examples": {
+                "Harry Potter": {
+                  "value": {
+                    "id": 1,
+                    "name": "Harry",
+                    "title": "Harry Potter",
+                    "author": "Potter",
+                    "email": "harry.potter@gmail.com",
+                    "category": [
+                      "action"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Book Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseBuilder"
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get all books",
+                    "value": {
+                      "success": true,
+                      "code": 200,
+                      "data": {
+                        "id": 1,
+                        "name": "Harry Potter",
+                        "title": "Harry Potter Salazar",
+                        "author": "Bagus Seno Prasetyo",
+                        "category": [
+                          "action"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "message": {
+                    "description": "Book Not Found",
+                    "value": {
+                      "message": "Book Not Found",
+                      "success": false,
+                      "code": 404
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get Detail Book By Id",
+        "description": "Get Detail Book By Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FindById"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Detail Book By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get all books",
+                    "value": {
+                      "success": true,
+                      "code": 200,
+                      "data": {
+                        "id": 1,
+                        "name": "Harry Potter",
+                        "title": "Harry Potter Salazar",
+                        "author": "Bagus Seno Prasetyo",
+                        "category": [
+                          "action"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "message": {
+                    "description": "Book Not Found",
+                    "value": {
+                      "success": false,
+                      "code": 404
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "tags": [
+          "Books"
+        ],
+        "summary": "Delete Book By Id",
+        "description": "Delete Book By Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FindById"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Deleted Book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "message": {
+                    "description": "Success Deleted Book",
+                    "value": {
+                      "success": true,
+                      "code": 200
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "message": {
+                    "description": "Book Not Found",
+                    "value": {
+                      "success": false,
+                      "code": 404
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "auth": {
+        "description": "Authentication For Book Service",
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    },
+    "schemas": {
+      "RequestCreateBook": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "pattern": "^\\S+@\\S+\\.\\S+$",
+            "format": "email",
+            "minLength": 6,
+            "maxLength": 127
+          },
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minItems": 1
+            }
+          }
+        }
+      },
+      "RequestUpdateBook": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "pattern": "^\\S+@\\S+\\.\\S+$",
+            "format": "email",
+            "minLength": 6,
+            "maxLength": 127
+          },
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minItems": 1
+            }
+          }
+        }
+      },
+      "ApiResponseBuilder": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ResponseBook"
+          }
+        }
+      },
+      "ResponseBook": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "FindById": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "ID Book For Deleted",
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
